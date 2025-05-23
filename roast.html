@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roast Me AI 🔥</title>
+  <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+      body {
+    /* Disaster Girl background */
+    background-image: url('Disaster_Girl.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+    .neo-brutal {
+      box-shadow: 5px 5px 0px #000000;
+      border: 3px solid #000000;
+    }
+    .typewriter {
+      font-family: 'Press Start 2P', cursive;
+      min-height: 80px;
+      white-space: pre-wrap;
+    }
+    .marker-font {
+      font-family: 'Permanent Marker', cursive;
+    }
+    .roast-card {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      padding: 2rem;
+      border-radius: 15px;
+      position: relative;
+    }
+    @keyframes shake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(-5px);
+      }
+      75% {
+        transform: translateX(5px);
+      }
+    }
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-yellow-200 min-h-screen p-4">
+  <div class="container mx-auto max-w-3xl">
+    <header class="text-center mb-8">
+      <h1 class="marker-font text-6xl mb-4 text-white">Roast Me AI 🔥</h1>
+      <small style="color: rgb(255, 255, 255); background-color: black; padding: 4px; border-radius: 4px;">
+  Star the Repository @ 
+  <a href="https://github.com/shittybin/roastmeai" style="color: rgb(233, 143, 255); text-decoration: none;">
+    shittybin/roastmeai
+  </a>
+</small><br>
+<marquee behavior="scroll" direction="left" style="background-color: #f9f1ff; color: #5c2d91; font-weight: bold; padding: 10px;">
+  ⚠️ This website works on a limited API. After some usage, the API may expire. You can change the API by cloning the repository and updating it accordingly. Thank You! Happy Coding!
+</marquee>
+    </header>
+
+    <div class="bg-white p-6 rounded-lg neo-brutal mb-8">
+      <div class="flex flex-col md:flex-row gap-4 mb-6">
+        <input
+          type="text"
+          id="nameInput"
+          placeholder="Enter your name or title (e.g., 'I wanna be a superhero')"
+          class="flex-1 p-4 text-lg border-4 border-black rounded neo-brutal focus:outline-none"
+        />
+        <button
+          onclick="generateRoast()"
+          class="bg-red-500 text-white px-6 py-4 rounded neo-brutal hover:bg-red-600 transition-colors marker-font text-xl"
+        >
+          🔥 Roast Me
+        </button>
+      </div>
+
+      <div
+        id="roastOutput"
+        class="typewriter text-xl mb-6 p-4 bg-gray-100 rounded neo-brutal hidden"
+      ></div>
+
+      <div id="roastCard" class="roast-card neo-brutal mb-6 hidden">
+        <h3 class="marker-font text-3xl text-white mb-4">🔥 ROAST CARD 🔥</h3>
+        <p id="roastCardText" class="text-white text-xl"></p>
+      </div>
+
+      <div class="flex flex-wrap gap-4 justify-center">
+        <button
+          onclick="downloadRoastCard()"
+          class="bg-blue-500 text-white px-6 py-3 rounded neo-brutal hover:bg-blue-600 transition-colors"
+        >
+          📥 Download Roast Card
+        </button>
+        <button
+          onclick="shareRoast()"
+          class="bg-green-500 text-white px-6 py-3 rounded neo-brutal hover:bg-green-600 transition-colors"
+        >
+          📢 Share Roast
+        </button>
+      </div>
+    </div>
+  </div>
+    <footer class="text-center bg-white text-gray-700 font-semibold">
+        <p>
+            Created by <a href="https://github.com/jsdingra11" target="_blank" rel="noopener noreferrer" class="text-hot-pink hover:underline">Jashanpreet Singh Dingra</a> &mdash; Powered by ☕️
+            <br>
+            Open Source @ <a href="https://github.com/shittybin/roastmeai" style="color: rgb(215, 89, 184);">shittybin</a>
+        </p>
+    </footer>
+  <script>
+    let currentRoast = '';
+
+    async function generateRoast() {
+      const nameInput = document.getElementById('nameInput');
+      const name = nameInput.value.trim() || 'Anonymous';
+      const roastOutput = document.getElementById('roastOutput');
+      const roastCard = document.getElementById('roastCard');
+      const roastCardText = document.getElementById('roastCardText');
+
+      roastOutput.classList.remove('hidden');
+      roastCard.classList.add('hidden');
+      roastOutput.classList.add('shake');
+      roastOutput.textContent = 'Preparing your roast... 🔥';
+
+      try {
+        const response = await fetch(
+          'https://r0c8kgwocscg8gsokogwwsw4.zetaverse.one/ai',
+          {
+            method: 'POST',
+            headers: {
+              Authorization: 'Bearer sk-7153dfb99e404165861c978e3766a395',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              messages: [
+                {
+                  role: 'user',
+                  content: [
+                    {
+                      type: 'text',
+                      text: `Generate 1 line, funny roast lines for someone who calls themselves "${name}". Keep it sharp, shameful and funny`,
+                    },
+                  ],
+                },
+              ],
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (!data.message) throw new Error('No message in response');
+
+        currentRoast = data.message;
+
+        roastOutput.innerHTML = '';
+
+        // New typewriter code - no erase after typing
+        const typewriter = new Typewriter(roastOutput, {
+          delay: 50,
+          cursor: '|',
+          autoStart: true,
+          loop: false,
+        });
+
+        typewriter.typeString(currentRoast).start();
+
+        roastCardText.textContent = currentRoast;
+        roastCard.classList.remove('hidden');
+      } catch (error) {
+        roastOutput.textContent =
+          'Sorry, something went wrong generating your roast. Please try again.';
+        console.error(error);
+      } finally {
+        setTimeout(() => roastOutput.classList.remove('shake'), 500);
+      }
+    }
+
+    async function downloadRoastCard() {
+      const roastCard = document.getElementById('roastCard');
+      if (roastCard.classList.contains('hidden')) return;
+
+      const canvas = await html2canvas(roastCard);
+      const link = document.createElement('a');
+      link.download = 'roast-card.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+
+    function shareRoast() {
+      if (!currentRoast) return;
+      const shareText = encodeURIComponent(
+        `Got roasted by AI! 🔥\n\n"${currentRoast}"\n\nTry it yourself at RoastMeAI!`
+      );
+      window.open(`https://twitter.com/intent/tweet?text=${shareText}`, '_blank');
+    }
+  </script>
+</body>
+</html>
