@@ -1,0 +1,42 @@
+
+      body {
+    /* Disaster Girl background */
+    background-image: url('Disaster_Girl.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+    .neo-brutal {
+      box-shadow: 5px 5px 0px #000000;
+      border: 3px solid #000000;
+    }
+    .typewriter {
+      font-family: 'Press Start 2P', cursive;
+      min-height: 80px;
+      white-space: pre-wrap;
+    }
+    .marker-font {
+      font-family: 'Permanent Marker', cursive;
+    }
+    .roast-card {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      padding: 2rem;
+      border-radius: 15px;
+      position: relative;
+    }
+    @keyframes shake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(-5px);
+      }
+      75% {
+        transform: translateX(5px);
+      }
+    }
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
